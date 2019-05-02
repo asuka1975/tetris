@@ -56,13 +56,13 @@ static Matrix4 none{
 	"    ",
 };
 
-static Matrix4 i_minorots[4] = { i_mino, i_mino.Rot90(), i_mino, i_mino.Rot90() };
-static Matrix4 o_minorots[4] = { o_mino, o_mino        , o_mino, o_mino         };
-static Matrix4 s_minorots[4] = { s_mino, s_mino.Rot90(), s_mino, s_mino.Rot90() };
-static Matrix4 z_minorots[4] = { z_mino, z_mino.Rot90(), z_mino, z_mino.Rot90() };
-static Matrix4 j_minorots[4] = { j_mino, j_mino.Rot90(), j_mino.Rot90().Rot90(), j_mino.Rot90().Rot90().Rot90() };
-static Matrix4 l_minorots[4] = { l_mino, l_mino.Rot90(), l_mino.Rot90().Rot90(), l_mino.Rot90().Rot90().Rot90() };
-static Matrix4 t_minorots[4] = { t_mino, t_mino.Rot90(), t_mino.Rot90().Rot90(), t_mino.Rot90().Rot90().Rot90() };
+static Matrix4 i_minorots[4];
+static Matrix4 o_minorots[4];
+static Matrix4 s_minorots[4];
+static Matrix4 z_minorots[4];
+static Matrix4 j_minorots[4];
+static Matrix4 l_minorots[4];
+static Matrix4 t_minorots[4];
 static Matrix4 nonerots[4] = { none, none, none, none };
 
 static Matrix4* allmino_version[8]{
@@ -112,4 +112,15 @@ Tetrimino & Tetrimino::operator=(const Tetrimino & obj)
 minotype Tetrimino::GetMinotype()
 {
 	return type;
+}
+
+void Tetrimino::InitMino()
+{
+	i_minorots[0] = i_mino; i_minorots[1] = i_mino.Rot90(); i_minorots[2] = i_mino; i_minorots[3] = i_mino.Rot90();
+	o_minorots[0] = o_mino; o_minorots[1] = o_mino        ; o_minorots[2] = o_mino; o_minorots[3] = o_mino        ;
+	s_minorots[0] = s_mino; s_minorots[1] = s_mino.Rot90(); s_minorots[2] = s_mino; s_minorots[3] = s_mino.Rot90();
+	z_minorots[0] = z_mino; z_minorots[1] = z_mino.Rot90(); z_minorots[2] = z_mino; z_minorots[3] = z_mino.Rot90();
+	j_minorots[0] = j_mino; j_minorots[1] = j_mino.Rot90(); j_minorots[2] = j_mino.Rot90().Rot90(); j_minorots[3] = j_mino.Rot90().Rot90().Rot90();
+	l_minorots[0] = l_mino; l_minorots[1] = l_mino.Rot90(); l_minorots[2] = l_mino.Rot90().Rot90(); l_minorots[3] = l_mino.Rot90().Rot90().Rot90();
+	t_minorots[0] = t_mino; t_minorots[1] = t_mino.Rot90(); t_minorots[2] = t_mino.Rot90().Rot90(); t_minorots[3] = t_mino.Rot90().Rot90().Rot90();
 }

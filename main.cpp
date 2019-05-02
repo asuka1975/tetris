@@ -6,6 +6,7 @@
 void Display(FieldControl& field);
 
 int main(void) {
+	Tetrimino::InitMino();
 	FieldControl field;
 	initscr();
 	start_color();

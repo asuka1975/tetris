@@ -17,6 +17,7 @@ public:
 	char operator()(unsigned int x, unsigned int y);
 	Tetrimino& operator=(const Tetrimino& obj);
 	minotype GetMinotype();
+	static void InitMino();
 private:
 	Matrix4 mino;
 	minotype type;
