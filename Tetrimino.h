@@ -10,6 +10,7 @@ enum minotype { I_MINO, O_MINO, S_MINO, Z_MINO, J_MINO, L_MINO, T_MINO, NONE };
 class Tetrimino
 {
 public:
+	Tetrimino();
 	Tetrimino(minotype t);
 	Tetrimino(const Tetrimino& obj);
 	~Tetrimino();

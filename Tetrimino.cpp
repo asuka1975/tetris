@@ -76,6 +76,10 @@ static Matrix4* allmino_version[8]{
 	nonerots
 };
 
+Tetrimino::Tetrimino() : type(NONE), mino(allmino_version[(int)NONE][0]), rotation(0)
+{
+}
+
 Tetrimino::Tetrimino(minotype t) : type(t), mino(allmino_version[(int)t][0]), rotation(0) {  }
 
 Tetrimino::Tetrimino(const Tetrimino & obj) : type(obj.type), mino(obj.mino), rotation(obj.rotation)

@@ -55,6 +55,10 @@ int main(void) {
 			break;
 		case 'x':
 			field.RotateMino(RIGHT);
+			break;
+		case ' ':
+			field.ExchangeForHold();
+			break;
 		default:
 			break;
 		}
@@ -85,36 +89,119 @@ void Display(FieldControl& field) {
 			switch (field.GetTrueValue(y, x)) {
 			case 'C':
 				attrset(COLOR_PAIR(1));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			case 'Y':
 				attrset(COLOR_PAIR(2));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			case 'G':
 				attrset(COLOR_PAIR(3));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			case 'R':
 				attrset(COLOR_PAIR(4));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			case 'B':
 				attrset(COLOR_PAIR(5));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			case 'W':
 				attrset(COLOR_PAIR(6));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			case 'M':
 				attrset(COLOR_PAIR(7));
-				mvaddch(y, x, '#');
+				mvaddch(y, x + 5, '#');
 				break;
 			default:
 				attrset(COLOR_PAIR(8));
-				mvaddch(y, x, '.');
+				mvaddch(y, x + 5, '.');
 				break;
+			}
+		}
+	}
+	Tetrimino mino = field.GetHold();
+	for (int y = 0; y < 4; y++) {
+		for (int x = 0; x < 4; x++) {
+			switch (mino(x, y))
+			{
+			case 'C':
+				attrset(COLOR_PAIR(1));
+				mvaddch(y + 1, x, '#');
+				break;
+			case 'Y':
+				attrset(COLOR_PAIR(2));
+				mvaddch(y + 1, x, '#');
+				break;
+			case 'G':
+				attrset(COLOR_PAIR(3));
+				mvaddch(y + 1, x, '#');
+				break;
+			case 'R':
+				attrset(COLOR_PAIR(4));
+				mvaddch(y + 1, x, '#');
+				break;
+			case 'B':
+				attrset(COLOR_PAIR(5));
+				mvaddch(y + 1, x, '#');
+				break;
+			case 'W':
+				attrset(COLOR_PAIR(6));
+				mvaddch(y + 1, x, '#');
+				break;
+			case 'M':
+				attrset(COLOR_PAIR(7));
+				mvaddch(y + 1, x, '#');
+				break;
+			default:
+				attrset(COLOR_PAIR(8));
+				mvaddch(y + 1, x, ' ');
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < 3; i++) {
+		mino = field.CheckNext(i);
+		for (int y = 0; y < 4; y++) {
+			for (int x = 0; x < 4; x++) {
+				switch (mino(x, y))
+				{
+				case 'C':
+					attrset(COLOR_PAIR(1));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				case 'Y':
+					attrset(COLOR_PAIR(2));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				case 'G':
+					attrset(COLOR_PAIR(3));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				case 'R':
+					attrset(COLOR_PAIR(4));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				case 'B':
+					attrset(COLOR_PAIR(5));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				case 'W':
+					attrset(COLOR_PAIR(6));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				case 'M':
+					attrset(COLOR_PAIR(7));
+					mvaddch(y + 1 + i * 4, x + 26, '#');
+					break;
+				default:
+					attrset(COLOR_PAIR(8));
+					mvaddch(y + 1 + i * 4, x + 26, ' ');
+					break;
+				}
 			}
 		}
 	}
@@ -130,6 +217,9 @@ void Display(FieldControl& field) {
 	char msg[256];
 	sprintf(msg, "Field: %d x %d, Puyo number: %03d", field.GetLine(), field.GetColumn(), count);
 	mvaddstr(2, COLS - 35, msg);
+
+	mvaddstr(0, 0, "hold");
+	mvaddstr(0, 26, "next");
 
 	refresh();
 }

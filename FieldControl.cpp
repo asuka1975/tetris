@@ -5,7 +5,7 @@
 
 
 
-FieldControl::FieldControl() : Field(), handlemino(NONE)
+FieldControl::FieldControl() : Field(), handlemino(NONE), holdmino(NONE), next_mino(3)
 {
 	x = 0;
 	y = 0;
@@ -13,10 +13,9 @@ FieldControl::FieldControl() : Field(), handlemino(NONE)
 
 void FieldControl::GenerateMino()
 {
-	srand((unsigned)clock());
 	x = GetColumn() / 2 - 3;
 	y = -1;
-	handlemino = Tetrimino((minotype)(rand() % 7));
+	handlemino = next_mino.Pop();
 }
 
 bool FieldControl::LandingMino()
@@ -64,11 +63,35 @@ void FieldControl::RotateMino(int direction)
 	if (!IsCorrectLocation()) handlemino.Rotate(-direction);
 }
 
+void FieldControl::ExchangeForHold()
+{
+	if (holdmino.GetMinotype() == NONE) {
+		holdmino = handlemino;
+		handlemino = next_mino.Pop();
+	}
+	else {
+		Tetrimino med = holdmino;
+		holdmino = handlemino;
+		handlemino = med;
+	}
+}
+
 char FieldControl::GetTrueValue(unsigned int y, unsigned int x)
 {
 	if ((0 <= x - this->x && x - this->x <= 3) && (0 <= y - this->y && y - this->y <= 3) && handlemino(x - this->x, y - this->y) != ' ')
 		return handlemino(x - this->x, y - this->y);
 	return GetValue(y, x);
+}
+
+Tetrimino FieldControl::GetHold()
+{
+	return holdmino;
+}
+
+Tetrimino FieldControl::CheckNext(int idx)
+{
+	if (!(0 <= idx && idx <= 3)) return Tetrimino(NONE);
+	return next_mino[idx];
 }
 
 int FieldControl::VanishLine()
