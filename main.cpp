@@ -115,6 +115,34 @@ void Display(FieldControl& field) {
 				attrset(COLOR_PAIR(7));
 				mvaddch(y, x + 5, '#');
 				break;
+			case 'c':
+				attrset(COLOR_PAIR(1));
+				mvaddch(y, x + 5, '*');
+				break;
+			case 'y':
+				attrset(COLOR_PAIR(2));
+				mvaddch(y, x + 5, '*');
+				break;
+			case 'g':
+				attrset(COLOR_PAIR(3));
+				mvaddch(y, x + 5, '*');
+				break;
+			case 'r':
+				attrset(COLOR_PAIR(4));
+				mvaddch(y, x + 5, '*');
+				break;
+			case 'b':
+				attrset(COLOR_PAIR(5));
+				mvaddch(y, x + 5, '*');
+				break;
+			case 'w':
+				attrset(COLOR_PAIR(6));
+				mvaddch(y, x + 5, '*');
+				break;
+			case 'm':
+				attrset(COLOR_PAIR(7));
+				mvaddch(y, x + 5, '*');
+				break;
 			default:
 				attrset(COLOR_PAIR(8));
 				mvaddch(y, x + 5, '.');
@@ -215,7 +243,7 @@ void Display(FieldControl& field) {
 	}
 
 	char msg[256];
-	sprintf(msg, "Field: %d x %d, Puyo number: %03d", field.GetLine(), field.GetColumn(), count);
+	sprintf(msg, "Field: %d x %d, Mino number: %03d", field.GetLine(), field.GetColumn(), count);
 	mvaddstr(2, COLS - 35, msg);
 
 	mvaddstr(0, 0, "hold");

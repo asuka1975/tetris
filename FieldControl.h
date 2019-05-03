@@ -22,13 +22,18 @@ public:
 	int VanishLine();
 	bool IsGameOver();
 private:
+	void PredictFallAtOnce(bool isfirst);
 	void FixMino();
 	bool IsCorrectLocation();
+	bool PredictIsCorrectLocation();
 	int CountMinocellOnLine(int line);
-	MinoGenerator next_mino;
+	MinoGenerator nexts;
 	Tetrimino handlemino;
 	Tetrimino holdmino;
+	Tetrimino predictmino;
 	int x;
 	int y;
+	int predict_x;
+	int predict_y;
 };
 
